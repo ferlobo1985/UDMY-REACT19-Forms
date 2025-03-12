@@ -64,6 +64,7 @@ const FormOne = () => {
                     className="form-control" 
                     id="firstname" 
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.firstname}
                   />
                   { errors.firstname && touched.firstname ?
