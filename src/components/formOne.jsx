@@ -1,4 +1,5 @@
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 const FormOne = () => {
 
@@ -9,25 +10,34 @@ const FormOne = () => {
           lastname:'',
           email:''
         }}
-        validate={ values => {
-          const errors = {};
+        validationSchema={Yup.object({
+          firstname: Yup.string()
+          .required('Sorry, this is required')
+          .max(5,'Sorry, the name is to long'),
+          lastname: Yup.string().required('Sorry, this is required'),
+          email:Yup.string()
+          .required('Sorry, this is required')
+          .email('Not a valid email')
+        })}
+        // validate={ values => {
+        //   const errors = {};
 
-          if(!values.firstname){
-            errors.firstname = 'Sorry, this is required'
-          }
-          if(!values.lastname){
-            errors.lastname = 'Sorry, this is required'
-          }
-          if(!values.email){
-            errors.email = 'Sorry, this is required'
-          } else if (
-            !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(values.email)
-          ){
-             errors.email = 'invalid email'
-          }
+        //   if(!values.firstname){
+        //     errors.firstname = 'Sorry, this is required'
+        //   }
+        //   if(!values.lastname){
+        //     errors.lastname = 'Sorry, this is required'
+        //   }
+        //   if(!values.email){
+        //     errors.email = 'Sorry, this is required'
+        //   } else if (
+        //     !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(values.email)
+        //   ){
+        //      errors.email = 'invalid email'
+        //   }
 
-          return errors;
-        }}
+        //   return errors;
+        // }}
         onSubmit={(values)=>{
           console.log(values)
         }}
